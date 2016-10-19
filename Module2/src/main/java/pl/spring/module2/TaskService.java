@@ -1,8 +1,8 @@
 package pl.spring.module2;
 
-import org.springframework.stereotype.Component;
+import javax.inject.Named;
 
-@Component("myService")
+@Named("serwis")
 public class TaskService {
 
 	public String getServiceId() {

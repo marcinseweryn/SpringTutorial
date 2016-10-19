@@ -12,7 +12,7 @@ public class Runner {
 
 		ApplicationContext contex = new ClassPathXmlApplicationContext("META-INF/spring/app-context.xml");
 
-		TaskService taskService = contex.getBean("myService", TaskService.class);
+		TaskService taskService = contex.getBean("serwis",TaskService.class);
 
 		String serviceId = taskService.getServiceId();
 
