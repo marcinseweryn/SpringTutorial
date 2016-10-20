@@ -8,5 +8,4 @@
 
 	<context:component-scan base-package="pl.spring.module2" />
 
-	<bean id="myService" class="pl.spring.module2.TaskService" />
 </beans>

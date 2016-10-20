@@ -2,19 +2,33 @@ package pl.spring.module2;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.AbstractApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 import pl.spring.module2.configuration.ApplicationConfiguration;
 
 public class Runner {
 
 	public static void main(String[] args) {
 
-		ApplicationContext contex = new AnnotationConfigApplicationContext(ApplicationConfiguration.class);
-
-		TaskService taskService = contex.getBean("serviceAlias", TaskService.class);
+		ApplicationContext context = new ClassPathXmlApplicationContext("META-INF/spring/app-context.xml");
+		AbstractApplicationContext applicationContext = (AbstractApplicationContext) context;
+		applicationContext.registerShutdownHook();
+		
+		TaskService taskService = context.getBean(TaskService.class);
+		//TaskService secondTaskService = context.getBean( TaskService.class);
 
 		String serviceId = taskService.getServiceId();
 
+		/*if (taskService == secondTaskService) {
+			System.out.println("referencje sa takie same");
+		} else {
+			System.out.println("referencje sa rozne");
+		}*/
+
+		
 		System.out.println("Id serwisu to: " + serviceId);
+		
 	}
 
 }
