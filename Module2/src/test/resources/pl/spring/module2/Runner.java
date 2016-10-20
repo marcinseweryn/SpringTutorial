@@ -16,15 +16,8 @@ public class Runner {
 		applicationContext.registerShutdownHook();
 		
 		TaskService taskService = context.getBean(TaskService.class);
-		//TaskService secondTaskService = context.getBean( TaskService.class);
 
 		String serviceId = taskService.getServiceId();
-
-		/*if (taskService == secondTaskService) {
-			System.out.println("referencje sa takie same");
-		} else {
-			System.out.println("referencje sa rozne");
-		}*/
 
 		
 		System.out.println("Id serwisu to: " + serviceId);
