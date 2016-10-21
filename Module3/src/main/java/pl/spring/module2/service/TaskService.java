@@ -11,7 +11,7 @@ import pl.spring.module2.model.Task;
 public class TaskService {
 
 	@Autowired(required = true)
-	private ToDoListChooserStrategy toDoListChooser;
+	private ToDoListStrategy toDoListChooser;
 
 	public String getServiceId() {
 		return "taskService#1";
@@ -19,10 +19,7 @@ public class TaskService {
 
 	public List<Task> findCurrentToDo() {
 		List<Task> toDoList = toDoListChooser.createToDoList();
-		toDoList.add(new Task(1L));
-		toDoList.add(new Task(2L));
-		toDoList.add(new Task(3L));
-
+	
 		return toDoList;
 	}
 

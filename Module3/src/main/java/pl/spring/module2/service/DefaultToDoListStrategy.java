@@ -8,9 +8,15 @@ import org.springframework.stereotype.Service;
 import pl.spring.module2.model.Task;
 
 @Service
-public class ToDoListChooserStrategy {
+public class DefaultToDoListStrategy implements ToDoListStrategy{
 
 	public List<Task> createToDoList() {
-		return new ArrayList<Task>();
+		List<Task> toDoList = new ArrayList<Task>();
+		
+		toDoList.add(new Task(1L));
+		toDoList.add(new Task(2L));
+		toDoList.add(new Task(3L));
+
+		return toDoList;
 	}
 }
