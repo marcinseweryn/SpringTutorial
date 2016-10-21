@@ -2,10 +2,12 @@ package pl.spring.module2.service;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import org.springframework.stereotype.Service;
 import pl.spring.module2.model.Task;
 
 @Service
+@ToDoListQualifier(strategy=ToDoListType.EISENHOWER)
 public class EisenhowerToDoListStrategy implements ToDoListStrategy {
 
 	public List<Task> createToDoList() {

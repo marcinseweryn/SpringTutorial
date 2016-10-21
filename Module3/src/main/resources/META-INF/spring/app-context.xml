@@ -7,5 +7,6 @@
 	<description>Example configuration to get you started.</description>
 
 	<context:component-scan base-package="pl.spring.module2.service" />
+	<context:property-placeholder location="classpath:META-INF/spring/service-config.properties"/>
 	
 </beans>
