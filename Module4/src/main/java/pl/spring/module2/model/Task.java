@@ -1,18 +1,20 @@
 package pl.spring.module2.model;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Task {
 
-	public static TaskBuilder New(){
+	public static TaskBuilder New() {
 		return new TaskBuilder();
 	}
-	
+
 	private Long Id;
 
 	private String subject;
 	private Date startDate, closeDate;
-	
+
 	public String getSubject() {
 		return subject;
 	}
@@ -25,46 +27,76 @@ public class Task {
 		return closeDate;
 	}
 
-	
 	@Override
-	public String toString(){
-		return "Zadanie "+Id+" Temat: "+subject+" Start: "+startDate+" Koniec: "+closeDate;
+	public String toString() {
+		return "Zadanie " + Id + " Temat: " + subject + " Start: " + startDate + " Koniec: " + closeDate + "\n";
 	}
-	
-	public static class TaskBuilder{
-		
+
+	public PropertiesMapBuilder NewMap() {
+		return new PropertiesMapBuilder(this);
+	}
+
+	public static class PropertiesMapBuilder {
+
+		private Map<String, Object> propertiesMap = new HashMap<String, Object>();
 		private Task task;
-		
-		private TaskBuilder(){
+
+		public PropertiesMapBuilder(Task task) {
+			this.task = task;
+		}
+
+		public PropertiesMapBuilder subject() {
+			propertiesMap.put("Subject", task.getSubject());
+			return this;
+		}
+
+		public PropertiesMapBuilder startDate() {
+			propertiesMap.put("Start_date", task.getStartDate());
+			return this;
+		}
+
+		public PropertiesMapBuilder closeDate() {
+			propertiesMap.put("Close_date", new Date(task.getCloseDate().getTime()));
+			return this;
+		}
+
+		public Map<String, Object> bulid() {
+			return propertiesMap;
+		}
+
+	}
+
+	public static class TaskBuilder {
+
+		private Task task;
+
+		private TaskBuilder() {
 			task = new Task();
 		}
-		
-			
-		public TaskBuilder withId(Long Id){
+
+		public TaskBuilder withId(Long Id) {
 			task.Id = Id;
 			return this;
 		}
-		
-		public TaskBuilder withSubject(String subject){
+
+		public TaskBuilder withSubject(String subject) {
 			task.subject = subject;
 			return this;
 		}
-		
-		public TaskBuilder startsOn(Date start){
+
+		public TaskBuilder startsOn(Date start) {
 			task.startDate = start;
 			return this;
 		}
-		
-		public TaskBuilder closedOn(Date close){
+
+		public TaskBuilder closedOn(Date close) {
 			task.closeDate = close;
 			return this;
 		}
-		
-        public Task build() {
-            return task;
-        }
+
+		public Task build() {
+			return task;
+		}
 	}
-	
-	
-	
+
 }

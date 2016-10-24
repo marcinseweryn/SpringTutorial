@@ -9,10 +9,12 @@
 	<description>Example configuration to get you started.</description>
 
 	<context:component-scan base-package="pl.spring.module2.service" />	
+	<context:property-placeholder location="classpath:META-INF/spring/database.properties"/>
 	
 	<bean name="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"
-	p:url="jdbc:mysql://localhost:3306/taskmanager?useSSL=false"
-	p:driverClassName="com.mysql.jdbc.Driver"
-	p:username="appuser"
-	p:password="123" />
+		p:url="${db.url}"
+		p:driverClassName="${db.driverClassName}"
+		p:username="${db.username}"
+		p:password="${db.password}" />
+	
 </beans>

@@ -1,32 +1,52 @@
 package pl.spring.module2.service;
 
-import java.util.Date;
-import java.util.HashMap;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
 import java.util.Map;
 import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 import pl.spring.module2.model.Task;
 
 @Repository
 public class TaskRepository {
-	
+
 	private SimpleJdbcInsert taskInsert;
-	
+	private JdbcTemplate jdbcTemplate;
+
 	@Autowired
-	public TaskRepository(DataSource dataSource){
+	public TaskRepository(DataSource dataSource) {
 		taskInsert = new SimpleJdbcInsert(dataSource).withTableName("task");
+		jdbcTemplate = new JdbcTemplate(dataSource);
+	}
+
+	public void saveTask(Task task) {
+		Map<String, Object> params = task.NewMap().subject().startDate().closeDate().bulid();
+
+		taskInsert.execute(params);
+
 	}
 	
-	public void saveTask(Task task){
-		Map<String,Object> params = new HashMap<String,Object>();
-		params.put("Subject",task.getSubject());
-		params.put("Start_date",new Date(task.getStartDate().getTime()));
-		params.put("Close_date",new Date(task.getCloseDate().getTime()));
-		System.out.println(task.toString());
-		
-		taskInsert.execute(params);
+	public List<Task> findAllTask(){
+		return jdbcTemplate.query("SELECT * FROM task;", new TaskMapper());
+	}
+	
+	public class TaskMapper implements RowMapper<Task>{
+
+		public Task mapRow(ResultSet rs, int rowNum) throws SQLException {
+			
+			Task task = Task.New().withId(rs.getLong("Id"))
+					.withSubject(rs.getString("Subject"))
+					.startsOn(new java.util.Date(rs.getDate("Start_date").getTime()))
+					.closedOn(new java.util.Date(rs.getDate("Close_date").getTime()))
+					.build();					
+			
+			return task;
+		}
 		
 	}
 }

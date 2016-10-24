@@ -2,7 +2,7 @@ package pl.spring.module2.service;
 
 
 import java.text.ParseException;
-
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.spring.module2.model.Task;
@@ -24,5 +24,8 @@ public class TaskService {
 		repository.saveTask(task);
 	}
 	
+	public List<Task> findAllTasks(){
+		return repository.findAllTask();
+	}
 
 }
