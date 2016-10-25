@@ -9,16 +9,13 @@ import pl.spring.module2.service.TaskService;
 
 public class Runner {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ParseException {
 		ApplicationContext context = new ClassPathXmlApplicationContext("META-INF/spring/app-context.xml");
 
 		TaskService taskService = context.getBean(TaskService.class);
 
-		/*try {
-			taskService.addTask("Zadanie", "2016-10-24", "2016-10-25");
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}*/
+		taskService.addTask("Zadanie 200", "2016-12-24", "2016-12-25");
+			
 		System.out.println(taskService.findAllTasks());
 	}
 
