@@ -3,17 +3,31 @@ package pl.spring.module2.model;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import javax.persistence.Id;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 
+@Entity
 public class Task {
 
 	public static TaskBuilder New() {
 		return new TaskBuilder();
 	}
 
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long Id;
-
+	
+	@Column(name="Subject")
 	private String subject;
-	private Date startDate, closeDate;
+	
+	@Column(name="Start_date")
+	private Date startDate;
+	
+	@Column(name="Close_date")
+	private Date closeDate;
 
 	public String getSubject() {
 		return subject;

@@ -12,6 +12,7 @@ import pl.spring.module2.Util;
 public class TaskService {
 	
 	@Autowired
+	@RepositoryQualifier(type=RepositoryType.JPA)
 	private TaskRepository repository;
 	
 	public void addTask(String subject, String startDate, String closeDate ) throws ParseException{

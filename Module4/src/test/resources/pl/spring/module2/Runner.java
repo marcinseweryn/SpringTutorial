@@ -14,11 +14,11 @@ public class Runner {
 
 		TaskService taskService = context.getBean(TaskService.class);
 
-		try {
+		/*try {
 			taskService.addTask("Zadanie", "2016-10-24", "2016-10-25");
 		} catch (ParseException e) {
 			e.printStackTrace();
-		}
+		}*/
 		System.out.println(taskService.findAllTasks());
 	}
 

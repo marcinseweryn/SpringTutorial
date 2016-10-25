@@ -16,5 +16,8 @@
 		p:driverClassName="${db.driverClassName}"
 		p:username="${db.username}"
 		p:password="${db.password}" />
+		
+	<bean name="entityManager" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
+	p:dataSource-ref="dataSource"  p:persistenceXmlLocation="classpath:META-INF/persistence.xml"/>
 	
 </beans>
