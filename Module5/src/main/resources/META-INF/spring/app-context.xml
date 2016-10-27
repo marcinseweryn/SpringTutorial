@@ -11,5 +11,8 @@
 	<context:component-scan base-package="*" />	
 	
 	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"/>
+	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+	<property name="basename" value="META-INF/spring/messages"></property>
+	</bean>
 	
 </beans>

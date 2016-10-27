@@ -2,13 +2,19 @@ package pl.spring.module2.model;
 
 import java.util.Date;
 
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Length;
+
 public class Task {
 
 	public static TaskBuilder New() {
 		return new TaskBuilder();
 	}
 
+	@NotNull
 	private Long Id;
+	@Length(max = 12)
 	private String subject;
 	private Date startDate;
 	private Date closeDate;

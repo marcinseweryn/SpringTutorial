@@ -4,6 +4,7 @@ package pl.spring.module2.service;
 import java.text.ParseException;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindException;
 import org.springframework.validation.Errors;
@@ -24,6 +25,9 @@ public class TaskService implements TaskRepository {
 	@Autowired
 	private Validator validator;
 	
+	@Autowired
+	private MessageSource messageSource;
+	
 	public void addTask(String subject,Date startDate, Date closeDate ) throws ParseException{
 		
 		Task task = Task.New().withId(1l)
@@ -37,8 +41,14 @@ public class TaskService implements TaskRepository {
 		validator.validate(task, errors);
 		
 		for (FieldError error : errors.getFieldErrors()) {		
-			System.out.println(errors);
+			String errorCode = formatErrorCode(error);
+			
 		}
+	}
+
+	private String formatErrorCode(FieldError error) {
+		
+		return error.getCode();
 	}
 
 	public void saveTask(Task task) {
