@@ -14,8 +14,10 @@ public class Task {
 
 	@NotNull
 	private Long Id;
+
 	@Length(max = 12)
 	private String subject;
+	
 	private Date startDate;
 	private Date closeDate;
 
@@ -29,6 +31,13 @@ public class Task {
 
 	public Date getCloseDate() {
 		return closeDate;
+	}
+	public Long getId() {
+		return Id;
+	}
+
+	public void setId(Long id) {
+		Id = id;
 	}
 
 	@Override

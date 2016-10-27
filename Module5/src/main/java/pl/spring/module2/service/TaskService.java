@@ -3,6 +3,8 @@ package pl.spring.module2.service;
 
 import java.text.ParseException;
 import java.util.List;
+import java.util.Locale;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
@@ -30,7 +32,7 @@ public class TaskService implements TaskRepository {
 	
 	public void addTask(String subject,Date startDate, Date closeDate ) throws ParseException{
 		
-		Task task = Task.New().withId(1l)
+		Task task = Task.New().withId(null)
 				.withSubject(subject)
 				.startsOn(startDate)
 				.closedOn(closeDate)
@@ -43,12 +45,15 @@ public class TaskService implements TaskRepository {
 		for (FieldError error : errors.getFieldErrors()) {		
 			String errorCode = formatErrorCode(error);
 			
+			String message = messageSource.getMessage(errorCode, null, new Locale("pl"));
+			System.out.println(message);
+			
 		}
 	}
 
 	private String formatErrorCode(FieldError error) {
 		
-		return error.getCode();
+		return error.getCode() + "." + error.getObjectName() + "." + error.getField();
 	}
 
 	public void saveTask(Task task) {
