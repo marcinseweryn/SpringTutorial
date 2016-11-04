@@ -2,6 +2,9 @@ package pl.spring.tutorial.model;
 
 import java.text.ParseException;
 import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 import pl.spring.tutorial.Util;
 
 public class Task {
@@ -14,15 +17,37 @@ public class Task {
 	private String subject;
 	private Date startDate;
 	private Date closeDate;
+	
+	public Long getId() {
+		return Id;
+	}
+
+	public void setId(Long id) {
+		Id = id;
+	}
+
+	public void setSubject(String subject) {
+		this.subject = subject;
+	}
+
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
+
+	public void setCloseDate(Date closeDate) {
+		this.closeDate = closeDate;
+	}	
 
 	public String getSubject() {
 		return subject;
 	}
 
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	public Date getStartDate() {
 		return startDate;
 	}
-
+	
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	public Date getCloseDate() {
 		return closeDate;
 	}
