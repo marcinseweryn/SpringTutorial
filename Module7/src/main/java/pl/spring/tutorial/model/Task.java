@@ -3,6 +3,10 @@ package pl.spring.tutorial.model;
 import java.text.ParseException;
 import java.util.Date;
 
+import javax.validation.constraints.Future;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import pl.spring.tutorial.Util;
@@ -14,8 +18,16 @@ public class Task {
 	}
 
 	private Long Id;
+	@NotNull
+	@Length(min=5,max=255)
 	private String subject;
+	
+	@NotNull
+	@Future
 	private Date startDate;
+
+	@NotNull
+	@Future
 	private Date closeDate;
 	
 	public Long getId() {

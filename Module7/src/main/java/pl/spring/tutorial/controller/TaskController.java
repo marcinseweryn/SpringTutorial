@@ -1,8 +1,11 @@
 package pl.spring.tutorial.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -27,7 +30,11 @@ public class TaskController {
 	}
 	
 	@RequestMapping(value="/all-tasks", method=RequestMethod.POST)
-	public String saveTask(Task task){
+	public String saveTask(@Valid Task task, BindingResult bindingResult){
+		
+		if(bindingResult.hasErrors()){
+			return "all-tasks";
+		}
 		
 		taskService.addTask(task);
 		
